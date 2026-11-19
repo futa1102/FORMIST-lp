@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FORMIST | キックボクシング パーソナルジム</title>
+<meta name="description" content="FORMISTはマンツーマン指導のキックボクシング・パーソナルジム。ダイエット、蹴り技習得、ストレス発散の3コースから、目的に合わせて選べます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --bg-2: #16161a;
+    --card: #1d1d22;
+    --line: #2c2c33;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --accent: #e8202a;
+    --accent-2: #ff5a36;
+    --diet: #ff7a1a;
+    --kick: #e8202a;
+    --stress: #2bb3ff;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans JP", system-ui, sans-serif;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+  .container { width: min(1120px, 100% - 32px); margin-inline: auto; }
+  .en { font-family: "Anton", sans-serif; letter-spacing: .04em; font-weight: 400; }
+
+  /* Header */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    background: rgba(13,13,15,.78);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: "Anton", sans-serif; font-size: 28px; letter-spacing: .08em; }
+  .logo span { color: var(--accent); }
+  .nav ul { display: flex; gap: 28px; list-style: none; font-size: 14px; font-weight: 500; }
+  .nav ul a { color: var(--muted); transition: color .2s; }
+  .nav ul a:hover { color: var(--text); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--accent); color: #fff; font-weight: 700;
+    padding: 14px 28px; border-radius: 999px; font-size: 15px;
+    transition: transform .2s, box-shadow .2s, background .2s;
+    box-shadow: 0 8px 24px rgba(232,32,42,.35);
+  }
+  .btn:hover { transform: translateY(-2px); background: var(--accent-2); }
+  .btn-sm { padding: 10px 20px; font-size: 13px; }
+  .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,.3); box-shadow: none; }
+  .btn-ghost:hover { background: rgba(255,255,255,.08); }
+
+  /* Hero */
+  .hero {
+    position: relative; min-height: 100vh; display: flex; align-items: center;
+    padding: 120px 0 80px;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 40%, rgba(232,32,42,.28), transparent 70%),
+      radial-gradient(ellipse 40% 40% at 10% 90%, rgba(255,90,54,.12), transparent 70%),
+      var(--bg);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "FORMIST"; position: absolute; right: -2vw; bottom: -4vw;
+    font-family: "Anton", sans-serif; font-size: 26vw; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.06);
+    pointer-events: none; user-select: none;
+  }
+  .hero-inner { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+  .eyebrow {
+    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .2em;
+    color: var(--accent); border: 1px solid var(--accent); padding: 4px 14px; border-radius: 999px;
+    margin-bottom: 24px;
+  }
+  .hero h1 { font-size: clamp(30px, 5vw, 60px); line-height: 1.2; font-weight: 900; letter-spacing: .02em; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero h1 .nw { white-space: nowrap; }
+  .hero p.lead { margin-top: 24px; font-size: clamp(15px, 1.6vw, 18px); color: #d4d4d8; max-width: 34em; }
+  .hero-cta { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-badges { margin-top: 40px; display: flex; gap: 28px; flex-wrap: wrap; }
+  .hero-badges div { border-left: 3px solid var(--accent); padding-left: 12px; }
+  .hero-badges strong { display: block; font-family: "Anton", sans-serif; font-size: 30px; line-height: 1.1; }
+  .hero-badges span { font-size: 12px; color: var(--muted); }
+  .hero-visual { position: relative; aspect-ratio: 1; }
+  .hero-visual svg { width: 100%; height: 100%; }
+
+  /* Sections */
+  section { padding: 120px 0; }
+  .sec-head { text-align: center; margin-bottom: 64px; }
+  .sec-head .en { display: block; font-size: clamp(44px, 7vw, 80px); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.25); }
+  .sec-head h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 900; margin-top: -12px; }
+  .sec-head p { color: var(--muted); margin-top: 16px; }
+
+  /* Problems */
+  .problems { background: var(--bg-2); }
+  .problem-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .problem {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 28px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .problem::before {
+    content: ""; flex: none; width: 22px; height: 22px; margin-top: 3px; border-radius: 6px;
+    background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/14px no-repeat;
+  }
+  .problems-answer { text-align: center; margin-top: 56px; font-size: clamp(20px, 2.6vw, 28px); font-weight: 900; }
+  .problems-answer em { font-style: normal; color: var(--accent); }
+
+  /* Courses */
+  .course-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .course {
+    --c: var(--accent);
+    position: relative; background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
+    transition: transform .3s, border-color .3s;
+  }
+  .course:hover { transform: translateY(-6px); border-color: var(--c); }
+  .course.diet { --c: var(--diet); }
+  .course.kick { --c: var(--kick); }
+  .course.stress { --c: var(--stress); }
+  .course-top {
+    position: relative; padding: 32px 28px 28px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--c) 30%, transparent), transparent 70%);
+    border-bottom: 1px solid var(--line);
+  }
+  .course-num { font-family: "Anton", sans-serif; font-size: 14px; color: var(--c); letter-spacing: .15em; }
+  .course-icon { width: 56px; height: 56px; color: var(--c); margin: 14px 0 16px; }
+  .course h3 { font-size: 26px; font-weight: 900; line-height: 1.3; }
+  .course .tagline { color: #d4d4d8; font-size: 14px; margin-top: 6px; }
+  .course-body { padding: 24px 28px 28px; flex: 1; display: flex; flex-direction: column; }
+  .course-body p { font-size: 14px; color: var(--muted); }
+  .course-body ul { list-style: none; margin: 20px 0; display: grid; gap: 8px; font-size: 14px; }
+  .course-body li { display: flex; gap: 10px; align-items: baseline; }
+  .course-body li::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--c); flex: none; transform: translateY(-1px); }
+  .course-meta { margin-top: auto; padding-top: 18px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .course-meta strong { color: var(--text); font-size: 15px; }
+
+  /* Features */
+  .features { background: var(--bg-2); }
+  .feature-list { display: grid; gap: 24px; }
+  .feature {
+    display: grid; grid-template-columns: 120px 1fr; gap: 32px; align-items: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 40px;
+  }
+  .feature .num { font-family: "Anton", sans-serif; font-size: 72px; line-height: 1; color: var(--accent); }
+  .feature h3 { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+  .feature p { color: var(--muted); font-size: 15px; }
+
+  /* Price */
+  .price-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .price-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; }
+  .price-card.featured { border-color: var(--accent); position: relative; }
+  .price-card.featured::after {
+    content: "おすすめ"; position: absolute; top: -14px; left: 36px; background: var(--accent);
+    font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 999px;
+  }
+  .price-card h3 { font-size: 18px; font-weight: 700; }
+  .price-card .amount { font-family: "Anton", sans-serif; font-size: 52px; line-height: 1.2; margin: 12px 0 4px; }
+  .price-card .amount small { font-family: "Noto Sans JP", sans-serif; font-size: 15px; font-weight: 500; color: var(--muted); margin-left: 6px; }
+  .price-card .note { font-size: 13px; color: var(--muted); }
+  .price-card ul { list-style: none; margin-top: 20px; display: grid; gap: 6px; font-size: 14px; }
+  .price-card li { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding: 8px 0; }
+  .price-foot { text-align: center; margin-top: 24px; font-size: 13px; color: var(--muted); }
+
+  /* Flow */
+  .flow { background: var(--bg-2); }
+  .flow-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; list-style: none; }
+  .flow-list li {
+    position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 28px 22px; counter-increment: step;
+  }
+  .flow-list li::before {
+    content: "STEP " counter(step, decimal-leading-zero); font-family: "Anton", sans-serif;
+    color: var(--accent); font-size: 15px; letter-spacing: .1em;
+  }
+  .flow-list h3 { font-size: 18px; font-weight: 900; margin: 6px 0 8px; }
+  .flow-list p { font-size: 14px; color: var(--muted); }
+
+  /* FAQ */
+  .faq-list { max-width: 820px; margin-inline: auto; display: grid; gap: 12px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+  summary {
+    cursor: pointer; list-style: none; padding: 22px 56px 22px 28px; font-weight: 700; position: relative;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "Q."; font-family: "Anton", sans-serif; color: var(--accent); margin-right: 10px; }
+  summary::after {
+    content: "+"; position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
+    font-size: 24px; color: var(--muted); transition: transform .2s;
+  }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  details p { padding: 0 28px 24px; color: var(--muted); font-size: 15px; }
+
+  /* CTA */
+  .cta {
+    text-align: center; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #b3121a, var(--accent) 50%, var(--accent-2));
+  }
+  .cta::before {
+    content: "FIGHT FOR YOUR FORM"; position: absolute; inset: auto 0 -20px; white-space: nowrap;
+    font-family: "Anton", sans-serif; font-size: 12vw; line-height: 1; color: rgba(0,0,0,.12);
+  }
+  .cta h2 { position: relative; font-size: clamp(26px, 4vw, 44px); font-weight: 900; line-height: 1.4; }
+  .cta p { position: relative; margin-top: 16px; font-size: 16px; }
+  .cta .btn { position: relative; margin-top: 36px; background: #fff; color: var(--accent); font-size: 17px; padding: 18px 40px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .cta .btn:hover { background: #fff; }
+
+  /* Form */
+  .contact-form { max-width: 720px; margin-inline: auto; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 40px; display: grid; gap: 20px; }
+  .field label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .field label .req { color: var(--accent); font-size: 12px; margin-left: 6px; }
+  .field input, .field select, .field textarea {
+    width: 100%; background: var(--bg); border: 1px solid var(--line); color: var(--text);
+    border-radius: 10px; padding: 14px 16px; font: inherit; font-size: 15px;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+  .radio-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .radio-group label { margin: 0; position: relative; }
+  .radio-group input { position: absolute; opacity: 0; pointer-events: none; }
+  .radio-group span {
+    display: block; text-align: center; padding: 12px 8px; border: 1px solid var(--line); border-radius: 10px;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all .2s; background: var(--bg);
+  }
+  .radio-group input:checked + span { border-color: var(--accent); background: rgba(232,32,42,.15); color: #fff; }
+  .radio-group input:focus-visible + span { outline: 2px solid var(--accent); }
+  .contact-form .btn { width: 100%; padding: 18px; font-size: 16px; border: none; cursor: pointer; font-family: inherit; }
+  .form-msg { text-align: center; font-weight: 700; color: #4ade80; display: none; }
+
+  footer { border-top: 1px solid var(--line); padding: 48px 0 100px; text-align: center; color: var(--muted); font-size: 13px; }
+  footer .logo { color: var(--text); display: inline-block; margin-bottom: 8px; }
+
+  /* Mobile fixed CTA */
+  .fixed-cta {
+    display: none; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 40;
+    transform: translateY(140%); transition: transform .3s;
+  }
+  .fixed-cta.show { transform: translateY(0); }
+  .fixed-cta .btn { width: 100%; }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 900px) {
+    .nav ul { display: none; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 340px; margin-inline: auto; order: -1; }
+    .problem-list, .course-list { grid-template-columns: 1fr; }
+    .price-wrap { grid-template-columns: 1fr; }
+    .flow-list { grid-template-columns: 1fr 1fr; }
+    .feature { grid-template-columns: 1fr; gap: 8px; padding: 28px; }
+    .feature .num { font-size: 52px; }
+    .fixed-cta { display: block; }
+  }
+  @media (max-width: 560px) {
+    section { padding: 88px 0; }
+    .hero { padding-top: 96px; }
+    .flow-list { grid-template-columns: 1fr; }
+    .radio-group { grid-template-columns: 1fr; }
+    .contact-form { padding: 28px 20px; }
+    .price-card { padding: 28px 22px; }
+    .header-cta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">FORM<span>I</span>ST</a>
+    <ul>
+      <li><a href="#courses">コース</a></li>
+      <li><a href="#features">特徴</a></li>
+      <li><a href="#price">料金</a></li>
+      <li><a href="#flow">ご利用の流れ</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-sm header-cta">無料体験を予約</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="eyebrow">KICKBOXING PERSONAL GYM</span>
+        <h1><span class="nw">蹴って、変わる。</span><br><span class="nw"><em>あなた専用</em>の</span><br><span class="nw">キックボクシング。</span></h1>
+        <p class="lead">FORMISTは、完全マンツーマンのキックボクシング・パーソナルジム。<br>「痩せたい」「蹴りを極めたい」「スカッとしたい」——あなたの目的に合わせて、トレーナーがメニューを組み立てます。</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn">無料体験を予約する →</a>
+          <a href="#courses" class="btn btn-ghost">コースを見る</a>
+        </div>
+        <div class="hero-badges">
+          <div><strong>1 on 1</strong><span>完全マンツーマン</span></div>
+          <div><strong>3</strong><span>目的別コース</span></div>
+          <div><strong>0</strong><span>経験不要・初心者歓迎</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff5a36"/><stop offset="1" stop-color="#e8202a"/>
+            </linearGradient>
+          </defs>
+          <circle cx="200" cy="200" r="180" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+          <circle cx="200" cy="200" r="130" stroke="rgba(255,255,255,.06)" stroke-width="2" stroke-dasharray="6 10"/>
+          <!-- kicking figure -->
+          <g stroke="url(#g1)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="150" cy="108" r="22" fill="url(#g1)" stroke="none"/>
+            <path d="M160 140 L185 220"/>
+            <path d="M163 150 L120 175 L135 140"/>
+            <path d="M168 158 L210 150 L232 128"/>
+            <path d="M185 220 L160 300 L175 335"/>
+            <path d="M185 220 L260 190 L330 160"/>
+          </g>
+          <!-- impact lines -->
+          <g stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85">
+            <path d="M345 128 L368 104"/><path d="M355 160 L388 160"/><path d="M345 192 L368 216"/>
+          </g>
+          <path d="M120 340 H280" stroke="rgba(255,255,255,.15)" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMS -->
+  <section class="problems">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="en">PROBLEM</span>
+        <h2>こんなお悩み、ありませんか？</h2>
+      </div>
+      <div class="problem-list">
+        <div class="problem reveal">ジムに通っても運動が続かず、体重が落ちない</div>
+        <div class="problem reveal">筋トレやランニングは単調で飽きてしまう</div>
+        <div class="problem reveal">かっこいいハイキックが打てるようになりたい</div>
+        <div class="problem reveal">格闘技ジムは怖そうで、一人で行く勇気が出ない</div>
+        <div class="problem reveal">仕事や人間関係のストレスが溜まりっぱなし</div>
+        <div class="problem reveal">自分のペースで、自分の目的だけに集中したい</div>
+      </div>
+      <p class="problems-answer reveal">その悩み、<em>FORMIST</em>のマンツーマン指導で解決します。</p>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section id="courses">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="en">COURSE</span>
+        <h2>目的で選べる3つのコース</h2>
+        <p>どのコースも初心者から始められます。途中でのコース変更もOK。</p>
+      </div>
+      <div class="course-list">
+        <!-- Diet -->
+        <article class="course diet reveal">
+          <div class="course-top">
+            <div class="course-num">COURSE 01</div>
+            <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3 4 5 4 9a4 4 0 0 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 0-8z"/><path d="M6 15a6 6 0 0 0 12 0"/></svg>
+            <h3>ダイエットコース</h3>
+            <p class="tagline">楽しく燃やして、引き締める。</p>
+          </div>
+          <div class="course-body">
+            <p>キックボクシングは全身を使う高強度の有酸素運動。ミット打ちとサーキットを組み合わせ、脂肪燃焼と引き締めを同時に狙います。</p>
+            <ul>
+              <li>脂肪燃焼に特化したミット打ちメニュー</li>
+              <li>体組成の定期測定で変化を見える化</li>
+              <li>無理なく続けられる食事アドバイス</li>
+              <li>くびれ・脚・二の腕など部位別強化</li>
+            </ul>
+            <div class="course-meta"><span>こんな方に</span><strong>体を変えたい方</strong></div>
+          </div>
+        </article>
+
+        <!-- Kick -->
+        <article class="course kick reveal">
+          <div class="course-top">
+            <div class="course-num">COURSE 02</div>
+            <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="4" r="2"/><path d="M8 7l2 6-3 8"/><path d="M10 13l10-5"/><path d="M8 8l-4 2"/><path d="M20 4l2-1M21 8h2M20 12l2 1"/></svg>
+            <h3>蹴り技習得コース</h3>
+            <p class="tagline">本格的な蹴りを、正しいフォームで。</p>
+          </div>
+          <div class="course-body">
+            <p>ミドル・ロー・ハイキックから、前蹴り・後ろ回し蹴りまで。基本フォームから段階的に、威力とキレのある蹴りを身につけます。</p>
+            <ul>
+              <li>軸足・腰の回転を分解して基礎から指導</li>
+              <li>股関節の柔軟性アップストレッチ</li>
+              <li>動画撮影でフォームをチェック</li>
+              <li>コンビネーション・ミット打ちで実践</li>
+            </ul>
+            <div class="course-meta"><span>こんな方に</span><strong>技を極めたい方</strong></div>
+          </div>
+        </article>
+
+        <!-- Stress -->
+        <article class="course stress reveal">
+          <div class="course-top">
+            <div class="course-num">COURSE 03</div>
+            <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+            <h3>ストレス発散コース</h3>
+            <p class="tagline">思いっきり打って、スカッと爽快。</p>
+          </div>
+          <div class="course-body">
+            <p>難しいことは考えず、トレーナーが構えるミットに全力でパンチ＆キック。溜まったモヤモヤを汗と一緒に吹き飛ばします。</p>
+            <ul>
+              <li>全力で打ち込めるミット打ち中心</li>
+              <li>音楽に合わせたテンポの良いメニュー</li>
+              <li>その日の気分・体調に合わせて調整</li>
+              <li>仕事帰り・休日のリフレッシュに最適</li>
+            </ul>
+            <div class="course-meta"><span>こんな方に</span><strong>リフレッシュしたい方</strong></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="en">FEATURE</span>
+        <h2>FORMISTが選ばれる理由</h2>
+      </div>
+      <div class="feature-list">
+        <div class="feature reveal">
+          <div class="num">01</div>
+          <div>
+            <h3>完全マンツーマンで、周りの目を気にしない</h3>
+            <p>トレーナーとあなただけの空間。運動が苦手な方も、格闘技が初めての方も、自分のペースで安心してトレーニングできます。</p>
+          </div>
+        </div>
+        <div class="feature reveal">
+          <div class="num">02</div>
+          <div>
+            <h3>目的に合わせたオーダーメイドメニュー</h3>
+            <p>体力レベルや目標をヒアリングし、毎回のセッションをあなた専用に設計。ダイエット・技術習得・リフレッシュ、それぞれに最短の道筋を。</p>
+          </div>
+        </div>
+        <div class="feature reveal">
+          <div class="num">03</div>
+          <div>
+            <h3>手ぶらでOK、仕事帰りにも通いやすい</h3>
+            <p>グローブ・ウェア・タオルはレンタル可能。シャワー完備なので、仕事帰りや予定の合間にも気軽に通えます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE -->
+  <section id="price">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="en">PRICE</span>
+        <h2>料金プラン</h2>
+        <p>全コース共通料金。1回 60分のマンツーマンセッションです。</p>
+      </div>
+      <div class="price-wrap">
+        <div class="price-card reveal">
+          <h3>都度払いプラン</h3>
+          <div class="amount">¥8,800<small>/ 1回（税込）</small></div>
+          <p class="note">自分のペースで通いたい方に</p>
+          <ul>
+            <li><span>入会金</span><span>¥11,000</span></li>
+            <li><span>レンタル一式</span><span>無料</span></li>
+          </ul>
+        </div>
+        <div class="price-card featured reveal">
+          <h3>月4回プラン</h3>
+          <div class="amount">¥30,800<small>/ 月（税込）</small></div>
+          <p class="note">1回あたり ¥7,700。習慣化して結果を出したい方に</p>
+          <ul>
+            <li><span>入会金</span><span>体験当日入会で無料</span></li>
+            <li><span>レンタル一式</span><span>無料</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="price-foot">まずは無料体験（60分）から。勧誘は一切いたしません。</p>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section id="flow" class="flow">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="en">FLOW</span>
+        <h2>無料体験の流れ</h2>
+      </div>
+      <ol class="flow-list">
+        <li class="reveal"><h3>WEB予約</h3><p>下のフォームから、希望コースと日時を選んで送信。</p></li>
+        <li class="reveal"><h3>カウンセリング</h3><p>目的・運動経験・体の状態をトレーナーがヒアリング。</p></li>
+        <li class="reveal"><h3>体験トレーニング</h3><p>基本の構えからミット打ちまで、実際に体を動かします。</p></li>
+        <li class="reveal"><h3>プランのご案内</h3><p>あなたに合ったプランをご提案。入会は任意です。</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="en">FAQ</span>
+        <h2>よくある質問</h2>
+      </div>
+      <div class="faq-list">
+        <details class="reveal"><summary>運動経験がまったくなくても大丈夫ですか？</summary><p>はい、大丈夫です。会員様の多くが格闘技未経験からのスタートです。体力や柔軟性に合わせて、無理のない強度から始めます。</p></details>
+        <details class="reveal"><summary>スパーリング（対人練習）はありますか？</summary><p>ご希望がない限り、相手と打ち合う練習は行いません。トレーナーが持つミットに打ち込むスタイルなので、痛い思いをする心配はありません。</p></details>
+        <details class="reveal"><summary>女性でも通えますか？</summary><p>もちろんです。完全マンツーマンなので周りの目を気にせず、ダイエットや引き締めを目的とした女性の方にも多くご利用いただいています。</p></details>
+        <details class="reveal"><summary>途中でコースを変更できますか？</summary><p>はい。料金はコース共通なので、「ダイエットが進んだから蹴り技も覚えたい」など、目的の変化に合わせていつでも変更できます。</p></details>
+        <details class="reveal"><summary>持ち物は何が必要ですか？</summary><p>手ぶらでお越しいただけます。グローブ・ウェア・タオルは無料でレンタルしています。お飲み物だけご持参ください。</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>最初の一蹴りが、<br>あなたを変える。</h2>
+      <p>まずは60分の無料体験で、キックボクシングの楽しさを体感してください。</p>
+      <a href="#contact" class="btn">無料体験を予約する →</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="en">CONTACT</span>
+        <h2>無料体験のご予約</h2>
+        <p>24時間受付。担当者より1営業日以内にご連絡します。</p>
+      </div>
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="field">
+          <label>ご希望のコース<span class="req">必須</span></label>
+          <div class="radio-group" role="radiogroup">
+            <label><input type="radio" name="course" value="ダイエット" required><span>ダイエット</span></label>
+            <label><input type="radio" name="course" value="蹴り技習得"><span>蹴り技習得</span></label>
+            <label><input type="radio" name="course" value="ストレス発散"><span>ストレス発散</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="name">お名前<span class="req">必須</span></label>
+          <input id="name" name="name" type="text" placeholder="山田 花子" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">メールアドレス<span class="req">必須</span></label>
+          <input id="email" name="email" type="email" placeholder="example@mail.com" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="tel">電話番号</label>
+          <input id="tel" name="tel" type="tel" placeholder="090-1234-5678" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="date">第一希望日</label>
+          <input id="date" name="date" type="date">
+        </div>
+        <div class="field">
+          <label for="msg">ご質問・ご要望</label>
+          <textarea id="msg" name="msg" rows="4" placeholder="運動経験や気になることがあればご記入ください"></textarea>
+        </div>
+        <button type="submit" class="btn">この内容で予約する</button>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a href="#" class="logo">FORM<span style="color:var(--accent)">I</span>ST</a>
+  <p>キックボクシング パーソナルジム</p>
+  <p style="margin-top:16px">&copy; FORMIST All Rights Reserved.</p>
+</footer>
+
+<div class="fixed-cta" id="fixedCta"><a href="#contact" class="btn">無料体験を予約する →</a></div>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // Mobile fixed CTA: show after hero, hide near contact form
+  const fixedCta = document.getElementById('fixedCta');
+  const hero = document.querySelector('.hero');
+  const contact = document.getElementById('contact');
+  const updateCta = () => {
+    const pastHero = hero.getBoundingClientRect().bottom < 0;
+    const nearContact = contact.getBoundingClientRect().top < window.innerHeight;
+    fixedCta.classList.toggle('show', pastHero && !nearContact);
+  };
+  window.addEventListener('scroll', updateCta, { passive: true });
+  updateCta();
+
+  // Form (front-end only; connect to a backend / form service to send)
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const msg = document.getElementById('formMsg');
+    const course = form.querySelector('input[name="course"]:checked');
+    if (!course || !form.elements.name.value.trim() || !form.elements.email.value || !form.elements.email.checkValidity()) {
+      msg.style.color = '#f87171';
+      msg.textContent = 'コース・お名前・メールアドレスを正しく入力してください。';
+      msg.style.display = 'block';
+      return;
+    }
+    msg.style.color = '#4ade80';
+    msg.textContent = `${course.value}コースの無料体験予約を受け付けました。担当者よりご連絡します。`;
+    msg.style.display = 'block';
+    form.reset();
+  });
+</script>
+</body>
+</html>
