@@ -106,8 +106,13 @@
     position: absolute; left: -24px; bottom: 32px; background: var(--navy); color: #fff;
     padding: 14px 22px; border-radius: 10px; box-shadow: 0 14px 30px rgba(26,44,62,.3); line-height: 1.6;
   }
+  .hero-badge { display: block; transition: transform .2s; }
+  .hero-badge:hover { transform: translateY(-2px); }
   .hero-badge small { display: block; font-size: 11px; color: var(--gold-light); letter-spacing: .12em; }
-  .hero-badge strong { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+  .hero-badge strong { display: block; font-family: var(--serif); font-size: 24px; font-weight: 600; letter-spacing: .12em; line-height: 1.4; }
+  .hero-badge-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .hero-badge-tags span { font-size: 12px; border: 1px solid rgba(217,181,111,.6); color: #f3e6cc; border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+  .hero-badge-more { display: block; margin-top: 8px; font-size: 11px; color: var(--gold-light); }
 
   /* Concept */
   .concept { background: var(--navy); color: #e9edf1; text-align: center; position: relative; overflow: hidden; }
@@ -263,7 +268,7 @@
     .nav ul { display: none; }
     .hero-inner, .trainer-inner { grid-template-columns: 1fr; gap: 48px; }
     .hero-photo { max-width: 360px; margin-inline: auto; width: 100%; }
-    .hero-badge { left: -8px; }
+    .hero-badge { left: -8px; bottom: 14px; padding: 12px 18px; }
     .hero-logo { margin-inline: auto; }
     .hero-text { text-align: center; }
     .hero-tags, .hero-offer { justify-content: center; }
@@ -329,7 +334,12 @@
       </div>
       <div class="hero-photo">
         <div class="frame"><img src="images/hero-fight.jpg" alt="試合で勝利し拳を掲げる代表トレーナー 坂口風太" width="1108" height="1276"></div>
-        <div class="hero-badge"><small>代表トレーナー</small><strong>現役プロキックボクサー</strong></div>
+        <a href="#trainer" class="hero-badge">
+          <small>FORMIST GYM 代表トレーナー</small>
+          <strong>坂口 風太</strong>
+          <span class="hero-badge-tags"><span>現役プロキックボクサー</span><span>テコンドー黒帯</span></span>
+          <span class="hero-badge-more">プロフィールを見る →</span>
+        </a>
       </div>
     </div>
   </section>
